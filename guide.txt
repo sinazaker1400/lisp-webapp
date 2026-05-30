@@ -1,0 +1,9 @@
+in the terminal :
+
+cd ~/quicklisp/local-projects/lisp-webapp
+sbcl
+
+in the sbcl :
+
+(ql:quickload "lisp-webapp" :force t)
+(lisp-webapp:start-app)

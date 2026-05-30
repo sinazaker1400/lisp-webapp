@@ -1,4 +1,4 @@
-(in-package :lisp-webapp/frontend)
+#| (in-package :lisp-webapp/frontend)
 
 ;;; Main app initialization
 (defun initialize-app ()
@@ -43,3 +43,39 @@
                 (lambda ()
                   (chain console (log "clicked"))))))))
 )
+ |#
+
+ (in-package :lisp-webapp/frontend)
+
+(defun generate-main-js ()
+  (ps
+
+    (chain console (log "Lisp WebApp loaded"))
+
+    (let ((button (chain document (get-element-by-id "fetch-btn")))
+
+      (when button
+        (chain button
+               (add-event-listener
+                "click"
+                (lambda ()
+
+                  (chain console (log "Fetching API data"))
+
+                  (chain
+                   (fetch "/api/data")
+
+                   (then
+                    (lambda (response)
+                      (chain response (json))))
+
+                   (then
+                    (lambda (data)
+                      (setf
+                       (chain
+                        (chain document
+                               (get-element-by-id "api-response"))
+                        inner-html)
+                       (+ "<pre>"
+                          (chain -JSON (stringify data))
+                          "</pre>")))))))))))))
