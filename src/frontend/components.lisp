@@ -29,4 +29,4 @@
 ;;; Calculator component
 (defun setup-calculator ()
   "Set up the calculator functionality"
-  (add-event-listener "calculate-btn"
+  (add-event-listener "calculate-btn"))

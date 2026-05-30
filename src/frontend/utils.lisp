@@ -28,4 +28,4 @@
 
 (defun add-event-listener (element-id event handler)
   "Add an event listener to an element"
-  (chain (element-by-id element-id) (add-event-listener event handler)))
+  (chain (element-by-id element-id) (add-event-listener event handler))))

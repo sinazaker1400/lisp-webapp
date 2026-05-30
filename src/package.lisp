@@ -22,10 +22,11 @@
   (:export 
    #:register-api-routes))
 
-;;; Page handlers package
 (defpackage :lisp-webapp/pages
   (:use :cl :hunchentoot)
-  (:export 
+  (:export
+   #:render-index
+   #:render-about
    #:register-page-routes))
 
 ;;; Frontend code (Parenscript) package
