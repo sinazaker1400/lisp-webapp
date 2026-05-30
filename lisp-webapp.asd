@@ -19,5 +19,6 @@
                  (:file "handlers/api" :depends-on ("server"))
                  (:file "frontend/utils" :depends-on ("package"))
                  (:file "frontend/components" :depends-on ("frontend/utils"))
+                 (:file "frontend/build" :depends-on ("frontend/components"))
                  (:file "routes" :depends-on ("handlers/pages" "handlers/api"))
                  (:file "main" :depends-on ("routes"))))))

@@ -11,23 +11,26 @@
 
 ;;; API endpoint with POST parameter
 (hunchentoot:define-easy-handler (calculate :uri "/api/calculate"
-                                             :default-request-type :post) 
+                                             :default-request-type :post)
     ((num1 :parameter-type 'integer :init-form 0)
      (num2 :parameter-type 'integer :init-form 0)
      (operation :parameter-type 'string :init-form "add"))
   "Calculate operation on two numbers"
   (setf (hunchentoot:content-type*) "application/json")
-  (let* ((result (case (intern (string-upcase operation))
-                   (:add (+ num1 num2))
-                   (:subtract (- num1 num2))
-                   (:multiply (* num1 num2))
-                   (:divide (if (zerop num2)
-                              "error: division by zero"
-                              (/ num1 num2)))
-                   (otherwise "error: unknown operation")))
-         (response (list :result result
-                         :operation operation
-                         :inputs (list :num1 num1 :num2 num2))))
+  (let* ((result
+           (case (intern (string-upcase operation) :keyword)
+             (:ADD (+ num1 num2))
+             (:SUBTRACT (- num1 num2))
+             (:MULTIPLY (* num1 num2))
+             (:DIVIDE (if (zerop num2)
+                          "error: division by zero"
+                          (/ num1 num2)))
+             (otherwise "error: unknown operation")))
+         (response
+           (list :result result
+                 :operation operation
+                 :inputs (list :num1 num1
+                               :num2 num2))))
     (json:encode-json-to-string response)))
 
 ;;; Register all API routes

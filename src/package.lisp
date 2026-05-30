@@ -32,9 +32,10 @@
 ;;; Frontend code (Parenscript) package
 (defpackage :lisp-webapp/frontend
   (:use :cl :parenscript)
-  (:export 
+  (:export
    #:generate-main-js
-   #:hello-component
-   #:fetch-data-component))
+   #:write-js-bundle))
+
+
 
 (in-package :lisp-webapp)

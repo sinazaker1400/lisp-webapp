@@ -30,3 +30,16 @@
 (defun setup-calculator ()
   "Set up the calculator functionality"
   (add-event-listener "calculate-btn"))
+
+(defun generate-main-js ()
+  (ps
+    (chain console (log "Lisp WebApp loaded"))
+
+    (let ((button (chain document (get-element-by-id "fetch-btn"))))
+      (when button
+        (chain button
+               (add-event-listener
+                "click"
+                (lambda ()
+                  (chain console (log "clicked"))))))))
+)

@@ -2,11 +2,11 @@
 
 ;;; Main entry point to start and stop the app
 (defun start-app (&key (port 8080))
-  "Start the Lisp WebApp server"
+  (lisp-webapp/frontend:write-js-bundle)
+
   (format t "~&~%=== Starting Lisp WebApp ===~%")
   (start-server :port port)
-  (format t "~&Server is running! Open your browser to: http://127.0.0.1:~D~%" port)
-  (format t "~&To stop the server, call (stop-app)~%~%"))
+  (format t "~&Server is running! Open your browser to: http://127.0.0.1:~D~%" port))
 
 (defun stop-app ()
   "Stop the Lisp WebApp server"
