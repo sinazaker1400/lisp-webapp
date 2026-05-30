@@ -7,3 +7,7 @@ in the sbcl :
 
 (ql:quickload "lisp-webapp" :force t)
 (lisp-webapp:start-app)
+
+to stop server :
+
+Ctrl + D or (lisp-webapp:stop-app)

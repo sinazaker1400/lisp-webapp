@@ -13,4 +13,4 @@
   (stop-server))
 
 ;;; Auto-start message
-(format t "~&Lisp WebApp loaded. Run (start-app) to start the server.~%")
+(format t "~&Lisp WebApp loaded. Run (lisp-webapp:start-app) to start the server & Run (lisp-webapp:stop-app) or Ctrl + D to stop it.~%")
