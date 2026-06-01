@@ -17,8 +17,11 @@
                  (:file "server" :depends-on ("package" "utilities/helpers"))
                  (:file "handlers/pages" :depends-on ("server"))
                  (:file "handlers/api" :depends-on ("server"))
-                 (:file "frontend/utils" :depends-on ("package"))
-                 (:file "frontend/components" :depends-on ("frontend/utils"))
-                 (:file "frontend/build" :depends-on ("frontend/components"))
+(:file "frontend/utils" :depends-on ("package"))
+(:file "frontend/styles" :depends-on ("package"))
+(:file "frontend/components" :depends-on ("frontend/utils"))
+(:file "frontend/build"
+ :depends-on ("frontend/components"
+              "frontend/styles"))
                  (:file "routes" :depends-on ("handlers/pages" "handlers/api"))
                  (:file "main" :depends-on ("routes"))))))

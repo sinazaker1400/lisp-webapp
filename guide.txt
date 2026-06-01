@@ -5,7 +5,18 @@ sbcl
 
 in the sbcl :
 
-(ql:quickload "lisp-webapp" :force t)
+(ql:quickload "lisp-webapp" :force t) 
+
+or :
+
+(ql:quickload :lisp-webapp)
+
+then :
+
+(lisp-webapp/frontend:build-assets)
+
+then:
+
 (lisp-webapp:start-app)
 
 to stop server :

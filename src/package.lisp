@@ -34,7 +34,9 @@
   (:use :cl :parenscript)
   (:export
    #:generate-main-js
-   #:write-js-bundle))
+   #:write-js-bundle
+   #:write-css-bundle
+   #:build-assets))
 
 
 
