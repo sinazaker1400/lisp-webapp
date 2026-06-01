@@ -11,3 +11,7 @@ in the sbcl :
 to stop server :
 
 Ctrl + D or (lisp-webapp:stop-app)
+
+to push :
+
+git push -u origin main

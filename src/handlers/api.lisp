@@ -1,13 +1,14 @@
 (in-package :lisp-webapp/api)
 
-;;; Sample API endpoint (GET request)
 (hunchentoot:define-easy-handler (get-data :uri "/api/data") ()
-  "Return JSON data"
   (setf (hunchentoot:content-type*) "application/json")
-  (let ((data (list :message "Hello from the backend!"
-                    :timestamp (local-time:format-timestring nil (local-time:now))
-                    :status "success")))
-    (json:encode-json-to-string data)))
+
+  (json:encode-json-to-string
+   `(("message" . "Hello from the backend!")
+     ("timestamp" . ,(local-time:format-timestring
+                      nil
+                      (local-time:now)))
+     ("status" . "success"))))
 
 ;;; API endpoint with POST parameter
 (hunchentoot:define-easy-handler (calculate :uri "/api/calculate"

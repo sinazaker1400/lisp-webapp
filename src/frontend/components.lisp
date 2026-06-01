@@ -45,19 +45,20 @@
 )
  |#
 
- (in-package :lisp-webapp/frontend)
+(in-package :lisp-webapp/frontend)
 
 (defun generate-main-js ()
   (ps
-
     (chain console (log "Lisp WebApp loaded"))
 
-    (let ((button (chain document (get-element-by-id "fetch-btn")))
+    (let ((button (chain document (get-element-by-id "fetch-btn"))))
 
       (when button
+
         (chain button
                (add-event-listener
                 "click"
+
                 (lambda ()
 
                   (chain console (log "Fetching API data"))
@@ -67,15 +68,22 @@
 
                    (then
                     (lambda (response)
-                      (chain response (json))))
+                      ((@ response json))))
 
                    (then
                     (lambda (data)
+
                       (setf
-                       (chain
-                        (chain document
-                               (get-element-by-id "api-response"))
-                        inner-html)
-                       (+ "<pre>"
-                          (chain -JSON (stringify data))
-                          "</pre>")))))))))))))
+ (getprop
+  (chain document
+         (get-element-by-id "api-response"))
+  "innerHTML")
+ (+ "<p><strong>Message:</strong> "
+    (@ data message)
+    "</p>"
+    "<p><strong>Status:</strong> "
+    (@ data status)
+    "</p>"
+    "<p><strong>Timestamp:</strong> "
+    (@ data timestamp)
+    "</p>"))))))))))))
