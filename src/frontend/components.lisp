@@ -47,14 +47,17 @@
 
 (in-package :lisp-webapp/frontend)
 
+(in-package :lisp-webapp/frontend)
+
 (defun generate-main-js ()
   (ps
+
     (chain console (log "Lisp WebApp loaded"))
 
+    ;; Fetch button
     (let ((button (chain document (get-element-by-id "fetch-btn"))))
 
       (when button
-
         (chain button
                (add-event-listener
                 "click"
@@ -74,16 +77,78 @@
                     (lambda (data)
 
                       (setf
- (getprop
-  (chain document
-         (get-element-by-id "api-response"))
-  "innerHTML")
- (+ "<p><strong>Message:</strong> "
-    (@ data message)
-    "</p>"
-    "<p><strong>Status:</strong> "
-    (@ data status)
-    "</p>"
-    "<p><strong>Timestamp:</strong> "
-    (@ data timestamp)
-    "</p>"))))))))))))
+                       (getprop
+                        (chain document
+                               (get-element-by-id "api-response"))
+                        "innerHTML")
+
+                       (+ "<p><strong>Message:</strong> "
+                          (@ data message)
+                          "</p>"
+
+                          "<p><strong>Status:</strong> "
+                          (@ data status)
+                          "</p>"
+
+                          "<p><strong>Timestamp:</strong> "
+                          (@ data timestamp)
+                          "</p>"))))))))))
+
+    ;; Calculator
+    (let ((calc-button
+            (chain document
+                   (get-element-by-id "calculate-btn"))))
+
+      (when calc-button
+
+        (chain calc-button
+               (add-event-listener
+
+                "click"
+
+                (lambda ()
+
+                  (let ((num1
+                          (parse-float
+                           (chain
+                            (chain document
+                                   (get-element-by-id "num1"))
+                            value)))
+
+                        (num2
+                          (parse-float
+                           (chain
+                            (chain document
+                                   (get-element-by-id "num2"))
+                            value)))
+
+                        (operation
+                          (chain
+                           (chain document
+                                  (get-element-by-id "operation"))
+                           value))
+
+                        (result 0))
+
+                    (cond
+
+                      ((== operation "add")
+                       (setf result (+ num1 num2)))
+
+                      ((== operation "subtract")
+                       (setf result (- num1 num2)))
+
+                      ((== operation "multiply")
+                       (setf result (* num1 num2)))
+
+                      ((== operation "divide")
+                       (setf result (/ num1 num2))))
+
+                    (setf
+                     (getprop
+                      (chain document
+                             (get-element-by-id "calc-result"))
+                      "innerHTML")
+
+                     (+ "<strong>Result:</strong> "
+                        result))))))))))
